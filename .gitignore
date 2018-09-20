@@ -1,6 +1,11 @@
 # Compiled class file
 *.class
-*.xml
+
+# Specific files in .idea folder
+workspace.xml
+usage.statistics.xml
+tasks.xml
+
 # Log file
 *.log
 
