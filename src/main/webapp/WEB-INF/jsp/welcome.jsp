@@ -64,7 +64,7 @@
             </ul>
 
             <form class="form-inline header-search-form my-2 my-lg-0" method="post">
-                <input class="form-control mr-sm-2" type="text" size="6"  placeholder="Enter City" name="city" aria-label="Search">
+                <input class="form-control mr-sm-2" type="text" size="0"  placeholder="Enter City" name="city" aria-label="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" value="Submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
 
@@ -74,29 +74,6 @@
 
     </div>
 </nav>
-
-<!-- Giffy / Slider -->
-<div class="jumbotron-wrap jumbotron-wrap-image mb-0">
-    <div class="container">
-        <div id="mainCarousel" class="carousel slide" data-ride="carousel">
-
-            <div class="jumbotron">
-                <h1 class="text-center">Welcome to WeatherForecast for Norway!</h1>
-
-            </div>
-
-
-            <div class="carousel-item">
-                <div class="jumbotron">
-
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
-</div>
 
 <section id="weclome" class="card-container">
     <div class="container">
@@ -136,48 +113,65 @@
                         }
                     </script>
 
+
+                    <a class="btn btn-secondary btn-lg"  data-toggle="modal" data-target="#myModalToday" role="button"><i class="fa fa-info"></i> &nbsp; Today</a>
+                    <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalTomorrow" role="button"><i class="fa fa-info"></i> &nbsp; Tomorrow</a>
+                </div></div>
+        </div>
+        <div id="myModalToday" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Weather Forecast</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <h3><div class="hiddentext" style="display: none;">Location Name:</div> ${locationName} </h3>
+                        <h3>Temperature today: ${temp1} C</h3>
+                        <h3>Date today: ${date}</h3>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                <a class="btn btn-secondary btn-lg text-align=center"  href="#" role="button"><i class="fa fa-info"></i> &nbsp; Today</a>
-                <a class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-info"></i> &nbsp; Tomorrow</a>
+
             </div>
         </div>
 
-        <div class=" row">
-            <div class="card-body ">
-                <div class="col-md-4">
-                    <div class="col-md-4">
-                        <h1>Location: ${locationName}</h1>
-                        <h1>Temperature: ${temperature} C</h1>
-                        <h1>Time: ${time}</h1>
-                        <h1>Rain: ${rain} [mm]</h1>
-                        <form method="post">
-                            Enter City: <input type="text" name="city"><br>
-                            <input type="submit" value="Submit">
-                        </form>
-                        <div class="col-md-4">
-                        </div>
+        <div id="myModalTomorrow" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Weather Forecast</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <h3><div class="hiddentext" style="display: none;">Location Name:</div> ${locationName} </h3>
+
+                        <h3>Temperature tomorrow: ${temp2} C</h3>
+                        <h3>Date today: ${date}</h3>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
+
 </section>
 
 
-<h1>Location Name: ${locationName} </h1>
-<h2>Longitude: ${lon}</h2>
-<h2>Latitude: ${lat}</h2>
-<h1>Temperature today: ${temp1} C</h1>
-<h1>Symbol Id today: ${symbolId1} </h1>
-<h1>Temperature tomorrow: ${temp2} C</h1>
-<h1>Symbol Id tomorrow: ${symbolId2} </h1>
-<h1>Date today: ${date}</h1>
-<h1>URL: ${url}</h1>
-
-<form method="post">
-    <input type="text" placeholder="Enter City" name="city"><br>
-    <input type="submit" value="Submit">
-</form>
 <!-- Footer -->
 <footer class="footer">
     <div class="footer-lists">
@@ -200,10 +194,12 @@
 
 
         <div class="footer-bottom">
-            <p class="text-center">Copyright 2018 by: Lasse, Arne, Rudi & Amund | Fullstack JavaCourse <br>
-                Experis Academy
-                </br>.</p>
-            <p class="text-center"><a href="#">Back to top</a></p>
+            <h3 class="text-center">  Lasse, Arne, Rudi & Amund  <br>
+                Fullstack JavaCourse <br>
+                Experis Academy <br>
+                Copyright @ <script data-turbolinks-eval="false" type="text/javascript"> document.write(new Date().getFullYear());</script>
+                </br>.</h3>
+            <h2 class="text-center"><a href="#">Back to top</a></h2>
         </div>
 
 </footer>
@@ -211,8 +207,31 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0W444WHTjBo2y4-LNwVtcv-FZvpiI0Vw&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfLlCoBPijskJ330ZgsQaePB0RKPke_a8&callback=initMap"
         async defer></script>
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    }</script>
+
 
 </body>
 </html>
