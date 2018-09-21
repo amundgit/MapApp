@@ -78,6 +78,10 @@ public class Forecast {
         forecast=(JSONObject)forecast.get("location");
         forecast=(JSONObject)forecast.get("temperature");
         today.setTemperature(forecast.get("value").toString());
+        forecast = array.getJSONObject(1);
+        forecast=(JSONObject)forecast.get("location");
+        forecast=(JSONObject)forecast.get("symbol");
+        today.setIconId(forecast.get("number").toString());
 
 
 
@@ -90,6 +94,12 @@ public class Forecast {
                 forecast=(JSONObject)forecast.get("location");
                 forecast=(JSONObject)forecast.get("temperature");
                 tomorrow.setTemperature(forecast.get("value").toString());
+                forecast = array.getJSONObject(i+1);
+                forecast=(JSONObject)forecast.get("location");
+                forecast=(JSONObject)forecast.get("symbol");
+                tomorrow.setIconId(forecast.get("number").toString());
+
+                break;
             }
 
 
