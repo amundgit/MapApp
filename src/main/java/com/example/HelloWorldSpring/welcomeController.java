@@ -4,6 +4,7 @@ import com.example.service.Forecast;
 import com.example.service.Geocoding;
 import com.example.service.Weather;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

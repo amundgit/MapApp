@@ -28,21 +28,28 @@
     </style>
 
     <script>
-        var longitude = "<c:out value='${longitude}'/>'";
-        var latitude = "<c:out value='${latitude}'/>'";
-        var iconId = "<c:out value='${iconId}'/>'";
+        var longitude = "<c:out  value='${longitude}'/>";
+        var json = JSON.parse(longitude.toString());
+        var latitude = "<c:out value='${latitude}'/>";
+        var iconId = "<c:out value='${iconId}'/>";
     </script>
 </head>
 
 <body>
 
 <script>
-    console.log("Longitudes:")
-    console.log(longitude)
-    console.log("Latitude:")
-    console.log(latitude)
-    console.log("Icon:")
-    console.log(iconId)
+    console.log("Longitudes:");
+    console.log(longitude);
+    console.log("Latitude:");
+    console.log(latitude);
+    console.log("Icon:");
+    console.log(iconId);
+
+    for(var i in json){
+        console.log(json[i]);
+    }
+
+
 </script>
 
 <bodyid="home" data-spy="scroll" data-target="#navbar-top" data-offset="200">
