@@ -34,13 +34,13 @@ public class welcomeController {
             geocoding.setLocation(city);
             forecast.setLocation(geocoding.getLongitude(),geocoding.getLattitude());
             String time = forecast.getTime();
-            String rain = forecast.getRain();
-            String temp = forecast.getTemperatur();
+            //String rain = forecast.getRain();
+            //String temp = forecast.getTemperatur();
             String geo = forecast.getUrl();
             model.addAttribute("time",time);
-            model.addAttribute("temperature",temp);
+            //model.addAttribute("temperature",temp);
             model.addAttribute("locationName",geo);
-            model.addAttribute("rain",rain);
+            //model.addAttribute("rain",rain);
 
         } catch (JSONException e) {
             e.printStackTrace();
