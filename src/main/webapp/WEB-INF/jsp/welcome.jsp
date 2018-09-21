@@ -11,9 +11,13 @@
 </script>
 
 
-<h1>Location Name: ${locationName} C</h1>
+<h1>Location Name: ${locationName} </h1>
+<h2>Longitude: ${lon}</h2>
+<h2>Latitude: ${lat}</h2>
 <h1>Temperature today: ${temp1} C</h1>
+<h1>Symbol Id today: ${symbolId1} </h1>
 <h1>Temperature tomorrow: ${temp2} C</h1>
+<h1>Symbol Id tomorrow: ${symbolId2} </h1>
 <h1>Date today: ${date}</h1>
 <h1>URL: ${url}</h1>
 

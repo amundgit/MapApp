@@ -37,6 +37,8 @@ public class welcomeController {
             geocoding.setLocation(city);
             forecast.setLocation(geocoding.getLongitude(),geocoding.getLattitude());
             String locationName=geocoding.getName();
+            String lon = geocoding.getLongitude();
+            String lat = geocoding.getLattitude();
             Weather today = forecast.getToday();
             Weather tomorrow = forecast.getTomorrow();
             String date = forecast.getStartDate().toString();
@@ -44,6 +46,10 @@ public class welcomeController {
             model.addAttribute("date",date);
             model.addAttribute("temp1",today.getTemperature());
             model.addAttribute("temp2",tomorrow.getTemperature());
+            model.addAttribute("symbolId1",today.getIconId());
+            model.addAttribute("symbolId2",tomorrow.getIconId());
+            model.addAttribute("lon",lon);
+            model.addAttribute("lat",lat);
             model.addAttribute("locationName",locationName);
             model.addAttribute("url",url);
 
