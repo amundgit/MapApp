@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+
 public class Forecast {
 
 
@@ -24,10 +26,23 @@ public class Forecast {
     }
 
     String url;
-    String iconIdToday,iconIdTommorow;
-    String temperaturToday,temperaturTommorow;
+
+    public Weather getToday() {
+        return today;
+    }
+
+    public Weather getTomorrow() {
+        return tomorrow;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    Weather today = new Weather();
+    Weather tomorrow = new Weather();
     String time;
-    String startDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance());
+    String startDate = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 
 
     public String getTime(){
@@ -58,15 +73,23 @@ public class Forecast {
         forecast=(JSONObject)forecast.get("weatherdata");
         forecast=(JSONObject)forecast.get("product");
         JSONArray array = forecast.getJSONArray("time");
-        setDataToday(array.getJSONObject(0));
+
+        forecast = array.getJSONObject(0);
+        forecast=(JSONObject)forecast.get("location");
+        forecast=(JSONObject)forecast.get("temperature");
+        today.setTemperature(forecast.get("value").toString());
 
 
 
 
         for(int i =0;i<array.length();i++){
 
-            if(!array.getJSONObject(i).get("from").toString().contains(startDate)){
-                setDataTomorrow(array.getJSONObject(i));
+            if(!array.getJSONObject(i).get("from").toString().contains(startDate)&&
+                array.getJSONObject(i).get("from").toString().equals(array.getJSONObject(i).get("to").toString())){
+                forecast = array.getJSONObject(i);
+                forecast=(JSONObject)forecast.get("location");
+                forecast=(JSONObject)forecast.get("temperature");
+                tomorrow.setTemperature(forecast.get("value").toString());
             }
 
 
@@ -74,15 +97,10 @@ public class Forecast {
         }
 
 
-
-
     }
 
-    private void setDataTomorrow(JSONObject forecast){
 
-    }
-    private  void setDataToday(JSONObject forecast){
 
-    }
+
 
 }

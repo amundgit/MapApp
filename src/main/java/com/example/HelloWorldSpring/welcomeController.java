@@ -2,7 +2,9 @@ package com.example.HelloWorldSpring;
 
 import com.example.service.Forecast;
 import com.example.service.Geocoding;
+import com.example.service.Weather;
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.Calendar;
 public class welcomeController {
 
     Geocoding geocoding = new Geocoding();
+
     Forecast forecast = new Forecast();
 
 
@@ -33,14 +36,17 @@ public class welcomeController {
             model.addAttribute("welcome",welcome);
             geocoding.setLocation(city);
             forecast.setLocation(geocoding.getLongitude(),geocoding.getLattitude());
-            String time = forecast.getTime();
-            String rain = forecast.getRain();
-            String temp = forecast.getTemperatur();
-            String geo = forecast.getUrl();
-            model.addAttribute("time",time);
-            model.addAttribute("temperature",temp);
-            model.addAttribute("locationName",geo);
-            model.addAttribute("rain",rain);
+            String locationName=geocoding.getName();
+            Weather today = forecast.getToday();
+            Weather tomorrow = forecast.getTomorrow();
+            String date = forecast.getStartDate().toString();
+            String url = forecast.getUrl();
+            model.addAttribute("date",date);
+            model.addAttribute("temp1",today.getTemperature());
+            model.addAttribute("temp2",tomorrow.getTemperature());
+            model.addAttribute("locationName",locationName);
+            model.addAttribute("url",url);
+
 
         } catch (JSONException e) {
             e.printStackTrace();
