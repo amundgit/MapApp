@@ -1,9 +1,9 @@
 package com.example.HelloWorldSpring;
-
 import com.example.service.Forecast;
 import com.example.service.Geocoding;
 import com.example.service.Weather;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/")
@@ -23,8 +25,22 @@ public class welcomeController {
 
 
     @RequestMapping(value = "/",method=RequestMethod.GET)
-    public String welcome(Model model){
-        model.addAttribute("welcomeMsg","Heissan");
+    public String welcome(Model model) throws IOException {
+        List<String> longList = new ArrayList<>();
+        List<String> latList = new ArrayList<>();
+        List<String> iconList = new ArrayList<>();
+        String [] cities = {"Oslo","Bergen","Trondheim","Stavanger","Tromsø"};
+        for(int i=0;i<cities.length;i++){
+            geocoding.setLocation(cities[i]);
+            forecast.setLocation(geocoding.getLongitude(),geocoding.getLattitude());
+            longList.add(geocoding.getLongitude());
+            latList.add(geocoding.getLattitude());
+            iconList.add(forecast.getToday().getIconId());
+
+        }
+        model.addAttribute("longitude",longList);
+        model.addAttribute("latitude",latList);
+        model.addAttribute("iconId",iconList);
 
         return "welcome";
     }
@@ -32,8 +48,7 @@ public class welcomeController {
     public String welcomeNew(@ModelAttribute("city")String city,Model model){
 
         try {
-            String welcome = "Welcome page";
-            model.addAttribute("welcome",welcome);
+
             geocoding.setLocation(city);
             forecast.setLocation(geocoding.getLongitude(),geocoding.getLattitude());
             String locationName=geocoding.getName();

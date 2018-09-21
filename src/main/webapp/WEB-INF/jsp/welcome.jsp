@@ -28,9 +28,18 @@
     </style>
 
     <script>
-        //var temp = "<c:out value='${temperature}'/>'";
+        var longitude = "<c:out  value='${longitude}'/>";
+        var jsonLongitude = JSON.parse(longitude.toString());
+        var latitude = "<c:out value='${latitude}'/>";
+        var jsonLatitude = JSON.parse(latitude.toString());
+        var iconId = "<c:out value='${iconId}'/>";
+        var jsonIconId = JSON.parse(iconId.toString());
     </script>
 </head>
+
+<body>
+
+
 <bodyid="home" data-spy="scroll" data-target="#navbar-top" data-offset="200">
 
 <!-- Main navigation -->
@@ -49,13 +58,13 @@
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav mr-auto">
                 <li data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-item">
-                   <!-- <a class="nav-link" href="#home">Home</a> -->
+                    <a class="nav-link" href="#home">Home</a>
                 </li>
 
             </ul>
 
             <form class="form-inline header-search-form my-2 my-lg-0" method="post">
-                <input class="form-control mr-sm-2" type="text" size="0"  placeholder="Enter City" name="city" aria-label="Search">
+                <input class="form-control mr-sm-2" type="text" size="6"  placeholder="Enter City" name="city" aria-label="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" value="Submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
 
@@ -65,9 +74,6 @@
 
     </div>
 </nav>
-
-<!-- Giffy / Slider -->
-
 
 <section id="weclome" class="card-container">
     <div class="container">
@@ -88,119 +94,26 @@
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map'), {
                                 zoom: 5,
-                                center: new google.maps.LatLng(59.959560, 10.607089),
+                                center: new google.maps.LatLng(64.42098, 16.0345166),
                                 mapTypeId: 'roadmap'
                             });
+                            var iconBasePrefix = 'https://api.met.no/weatherapi/weathericon/1.1/?symbol=';
+                            var iconBaseSuffix = '&content_type=image/png';
 
-                            var iconBase = 'https://api.met.no/weatherapi/weathericon/1.1/?symbol=';
-                            var iconSuf = '&content_type=image/png';
-                            var icons = {
-                                parking: {
-                                    icon: iconBase + '1' + iconSuf
-                                },
-                                library: {
-                                    icon: iconBase + 'library_maps.png'
-                                },
-                                info: {
-                                    icon: iconBase + 'info-i_maps.png'
-                                }
-                            };
-
-                            var contentString = '<div id="content">'+
-                                        '<div id="siteNotice">'+
-                                        '</div>'+
-                                        '<h1 id="firstHeading" class="firstHeading">derr</h1>'+
-                                        '<div id="bodyContent">'+
-                                        '<p><b>Working</b>'+
-                                        '</p>'+
-                                        '</div>'+
-                                        '</div>';
-
-                                    var infowindow = new google.maps.InfoWindow({
-                                      content: contentString
-                                    });
-
-
-                            var features = [
-                                {
-                                    position: new google.maps.LatLng(-33.91721, 151.22630),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(60.410270, 5.326397),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91747, 151.22912),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91910, 151.22907),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91725, 151.23011),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91872, 151.23089),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91784, 151.23094),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91682, 151.23149),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91790, 151.23463),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91666, 151.23468),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.916988, 151.233640),
-                                    type: 'info'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91662347903106, 151.22879464019775),
-                                    type: 'parking'
-                                }, {
-                                    position: new google.maps.LatLng(-33.916365282092855, 151.22937399734496),
-                                    type: 'parking'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91665018901448, 151.2282474695587),
-                                    type: 'parking'
-                                }, {
-                                    position: new google.maps.LatLng(-33.919543720969806, 151.23112279762267),
-                                    type: 'parking'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91608037421864, 151.23288232673644),
-                                    type: 'parking'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91851096391805, 151.2344058214569),
-                                    type: 'parking'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91818154739766, 151.2346203981781),
-                                    type: 'parking'
-                                }, {
-                                    position: new google.maps.LatLng(-33.91727341958453, 151.23348314155578),
-                                    type: 'library'
-                                }
-                            ];
-
-                            // Create markers.
-                            features.forEach(function(feature) {
+                            for(var i in jsonLatitude){
                                 var marker = new google.maps.Marker({
-                                    position: feature.position,
-                                    icon: icons[feature.type].icon,
+                                    position: new google.maps.LatLng(jsonLatitude[i], jsonLongitude[i]),
+                                    icon: iconBasePrefix + jsonIconId[i] + iconBaseSuffix,
                                     map: map
-                                });
-                                marker.addListener('click', function() {
-                                    infowindow.open(map, marker);
-                                });
-
-                            });
+                                })
+                            }
                         }
                     </script>
 
 
-                <a class="btn btn-secondary btn-lg"  data-toggle="modal" data-target="#myModalToday" role="button"><i class="fa fa-info"></i> &nbsp; Today</a>
-                <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalTomorrow" role="button"><i class="fa fa-info"></i> &nbsp; Tomorrow</a>
-            </div></div>
+                    <a class="btn btn-secondary btn-lg"  data-toggle="modal" data-target="#myModalToday" role="button"><i class="fa fa-info"></i> &nbsp; Today</a>
+                    <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalTomorrow" role="button"><i class="fa fa-info"></i> &nbsp; Tomorrow</a>
+                </div>      </div>
         </div>
 
         <div id="myModalToday" class="modal fade" role="dialog">
@@ -240,7 +153,7 @@
 
                         <h3><div class="hiddentext" style="display: none;">Location Name:</div> ${locationName} </h3>
 
-                <h3>Temperature tomorrow: ${temp2} C</h3>
+                        <h3>Temperature tomorrow: ${temp2} C</h3>
                         <h3>Date today: ${date}</h3>
 
 
@@ -255,7 +168,6 @@
     </div>
 
 </section>
-
 <!-- Footer -->
 <footer class="footer">
     <div class="footer-lists">
@@ -294,32 +206,33 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfLlCoBPijskJ330ZgsQaePB0RKPke_a8&callback=initMap"
         async defer></script>
 <script>
-// Get the modal
-var modal = document.getElementById('myModal');
+    // Get the modal
+    var modal = document.getElementById('myModal');
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
         modal.style.display = "none";
     }
-}
-}</script>
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    }
+</script>
 
 
 </body>
