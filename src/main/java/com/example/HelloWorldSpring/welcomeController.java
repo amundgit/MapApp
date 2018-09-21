@@ -26,7 +26,8 @@ public class welcomeController {
     List<String> longList = new ArrayList<>();
     List<String> latList = new ArrayList<>();
     List<String> iconList = new ArrayList<>();
-    
+    List<String> iconListTomorrow = new ArrayList<>();
+
 
 
     @RequestMapping(value = "/",method=RequestMethod.GET)
@@ -39,11 +40,13 @@ public class welcomeController {
             longList.add(geocoding.getLongitude());
             latList.add(geocoding.getLattitude());
             iconList.add(forecast.getToday().getIconId());
+            iconListTomorrow.add(forecast.getTomorrow().getIconId());
 
         }
         model.addAttribute("longitude",longList);
         model.addAttribute("latitude",latList);
         model.addAttribute("iconId",iconList);
+        model.addAttribute("iconIdTomorrow",iconListTomorrow);
 
         return "welcome";
     }
@@ -74,11 +77,13 @@ public class welcomeController {
             longList.add(lon);
             latList.add(lat);
             iconList.add(today.getIconId());
+            iconListTomorrow.add(tomorrow.getIconId());
 
 
             model.addAttribute("longitude",longList);
             model.addAttribute("latitude",latList);
             model.addAttribute("iconId",iconList);
+            model.addAttribute("iconIdTomorrow",iconListTomorrow);
 
 
         } catch (JSONException e) {

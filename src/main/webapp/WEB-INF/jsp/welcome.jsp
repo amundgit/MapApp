@@ -34,6 +34,8 @@
         var jsonLatitude = JSON.parse(latitude.toString());
         var iconId = "<c:out value='${iconId}'/>";
         var jsonIconId = JSON.parse(iconId.toString());
+        var iconIdTomorrow = "<c:out value='${iconIdTomorrow}'/>";
+        var jsonIconIdTomorrow = JSON.parse(iconIdTomorrow.toString());
     </script>
 </head>
 
