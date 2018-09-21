@@ -7,14 +7,16 @@
 </head>
 <body>
 <script>
-    var temp = "<c:out value='${temperature}'/>'";
+    //var temp = "<c:out value='${temperature}'/>'";
 </script>
 
 
-<h1>Location: ${locationName}</h1>
-<h1>Temperature: ${temperature} C</h1>
-<h1>Time: ${time}</h1>
-<h1>Rain: ${rain} [mm]</h1>
+<h1>Location Name: ${locationName} C</h1>
+<h1>Temperature today: ${temp1} C</h1>
+<h1>Temperature tomorrow: ${temp2} C</h1>
+<h1>Date today: ${date}</h1>
+<h1>URL: ${url}</h1>
+
 <form method="post">
     Enter City: <input type="text" name="city"><br>
     <input type="submit" value="Submit">
