@@ -23,13 +23,15 @@ public class welcomeController {
     Geocoding geocoding = new Geocoding();
 
     Forecast forecast = new Forecast();
+    List<String> longList = new ArrayList<>();
+    List<String> latList = new ArrayList<>();
+    List<String> iconList = new ArrayList<>();
+    
 
 
     @RequestMapping(value = "/",method=RequestMethod.GET)
     public String welcome(Model model) throws IOException {
-        List<String> longList = new ArrayList<>();
-        List<String> latList = new ArrayList<>();
-        List<String> iconList = new ArrayList<>();
+
         String [] cities = {"Oslo","Bergen","Trondheim","Stavanger","Tromsø"};
         for(int i=0;i<cities.length;i++){
             geocoding.setLocation(cities[i]);
@@ -68,6 +70,15 @@ public class welcomeController {
             model.addAttribute("lat",lat);
             model.addAttribute("locationName",locationName);
             model.addAttribute("url",url);
+
+            longList.add(lon);
+            latList.add(lat);
+            iconList.add(today.getIconId());
+
+
+            model.addAttribute("longitude",longList);
+            model.addAttribute("latitude",latList);
+            model.addAttribute("iconId",iconList);
 
 
         } catch (JSONException e) {
