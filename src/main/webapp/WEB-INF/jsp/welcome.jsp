@@ -112,10 +112,11 @@
                                 mapTypeId: 'roadmap'
                             });
 
-                            var iconBase = 'https://api.met.no/weatherapi/weathericon/1.1/available/';
+                            var iconBase = 'https://api.met.no/weatherapi/weathericon/1.1/?symbol=';
+                            var iconSuf = '&content_type=image/png';
                             var icons = {
                                 parking: {
-                                    icon: iconbase + '1'
+                                    icon: iconBase + '1' + iconSuf
                                 },
                                 library: {
                                     icon: iconBase + 'library_maps.png'
@@ -124,6 +125,21 @@
                                     icon: iconBase + 'info-i_maps.png'
                                 }
                             };
+
+                            var contentString = '<div id="content">'+
+                                        '<div id="siteNotice">'+
+                                        '</div>'+
+                                        '<h1 id="firstHeading" class="firstHeading">derr</h1>'+
+                                        '<div id="bodyContent">'+
+                                        '<p><b>Working</b>'+
+                                        '</p>'+
+                                        '</div>'+
+                                        '</div>';
+
+                                    var infowindow = new google.maps.InfoWindow({
+                                      content: contentString
+                                    });
+
 
                             var features = [
                                 {
@@ -193,6 +209,10 @@
                                     icon: icons[feature.type].icon,
                                     map: map
                                 });
+                                marker.addListener('click', function() {
+                                    infowindow.open(map, marker);
+                                });
+
                             });
                         }
                     </script>
